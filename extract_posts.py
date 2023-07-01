@@ -85,8 +85,10 @@ page_cover_image = page_data['cover_image']
 # Clean the page cover image URL
 cleaned_cover_image = page_cover_image.replace('__GHOST_URL__/', '')
 
+index_links = [{'title': post[0], 'url': post[1], 'date': post[3]} for post in reversed(posts)]
+
 # Render the HTML template with page data
-index_html = index_template.render(title=page_title, description=page_description, cover_image=cleaned_cover_image, posts=posts)
+index_html = index_template.render(title=page_title, description=page_description, cover_image=cleaned_cover_image, posts=index_links)
 
 # Write the index HTML to a file in the output directory
 index_file = os.path.join(output_dir, 'index.html')
