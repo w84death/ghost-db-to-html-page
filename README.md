@@ -50,4 +50,4 @@ This will start a local web server. Open your web browser and visit `http://loca
 
 - Always make a backup of your database before running the script to avoid any accidental data loss.
 
-- This script and description was made with a help of ChatGPT
+- This script and description was made with a help of ChatGPT. If you are intrested in the process [here is the transcript](https://chat.openai.com/share/ef3da4e1-439e-4459-9528-824c31a09285)
