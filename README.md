@@ -34,6 +34,12 @@ This will start a local web server. Open your web browser and visit `http://loca
 
 8. You can customize the HTML templates for individual posts and the index page by modifying the respective template files (`template.html` and `index_template.html`). Make sure to update the script with the correct paths to these template files.
 
+## Example output
+
+![Index page](examples/index.png)
+
+![Post page](examples/post.png)
+
 ## Notes
 
 - Ensure that the necessary images, or any other external assets referenced in the HTML templates are also included in the appropriate directories within the `out` directory for proper rendering.
