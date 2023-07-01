@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title>{{ title }}</title>
+  </head>
+  <body>
+    <header>
+      <h1>{{ title }}</h1>
+      <h2>{{ description }}</h2>
+      <img src="{{ cover_image }}" alt="Cover Image">
+    </header>
+    <main>
+      <h2>The posts archive</h2>
+       <ul>
+        {% for post in posts %}
+        <li><a href="{{ post[1] }}.html">{{ post[0] }}</a> <small>{{ post[3] }}</small></li>
+        {% endfor %}
+      </ul>
+    </main>
+    <footer>
+      <small>&copy;2023 Krzysztof Krystian Jankowski, krzysztofjankowski.com</small>
+    </footer>
+  </body>
+</html>
