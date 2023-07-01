@@ -10,9 +10,9 @@ This Python script extracts posts from a Ghost blog SQLite database and generate
 
 ## Usage
 
-1. Ensure you have a backup of your Ghost blog database in SQLite format (`database.db`).
+1. Ensure you have a backup of your Ghost blog database in SQLite format (`ghost.db`).
 
-2. Place the script in the same directory as the backup database.
+2. Place the `ghost.db` in a local directory accessible from the script direcotry.
 
 3. Open a terminal or command prompt and navigate to the script directory.
 
