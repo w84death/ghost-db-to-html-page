@@ -34,7 +34,7 @@ for key in keys:
         page_data[key] = ""
 
 # Extract and list posts
-cursor.execute("SELECT title, slug, html, created_at FROM posts")
+cursor.execute("SELECT title, slug, html, created_at FROM posts WHERE html != ''")
 posts = cursor.fetchall()
 
 # HTML template for individual post pages
@@ -43,18 +43,32 @@ post_template = Template(open('page_template.html').read())
 # HTML template for the index page
 index_template = Template(open('index_template.html').read())
 
-# Function to clean the post HTML
 def clean_html(post_html):
+    if not post_html:
+        return ""
+
     # Remove instances of '__GHOST_URL__/'
     cleaned_html = post_html.replace('__GHOST_URL__/', '')
 
     # Remove 'class' instances with parameters
     cleaned_html = re.sub(r'class=".*?"', '', cleaned_html)
 
-    # Strip <img> tags from everything except 'src'
-    cleaned_html = re.sub(r'<img((?!src=).)*>', '', cleaned_html)
+    # Clean <img> tags
+    cleaned_html = re.sub(r'<img([^>]*)>', lambda match: clean_img_tag(match.group(0)), cleaned_html)
 
     return cleaned_html
+
+def clean_img_tag(img_tag):
+    # Extract 'src' and 'width' attributes
+    src_match = re.search(r'src="(.*?)"', img_tag)
+    width_match = re.search(r'width="(\d+)"', img_tag)
+
+    if src_match and width_match:
+        src = src_match.group(1)
+        width = '640'
+        return f'<img src="{src}" width="{width}">'
+    else:
+        return img_tag
 
 # Generate individual HTML pages for each post
 for post in posts:
@@ -80,15 +94,11 @@ for post in posts:
 # Extract page data
 page_title = page_data['og_title']
 page_description = page_data['description']
-page_cover_image = page_data['cover_image']
-
-# Clean the page cover image URL
-cleaned_cover_image = page_cover_image.replace('__GHOST_URL__/', '')
 
 index_links = [{'title': post[0], 'url': post[1], 'date': post[3]} for post in reversed(posts)]
 
 # Render the HTML template with page data
-index_html = index_template.render(title=page_title, description=page_description, cover_image=cleaned_cover_image, posts=index_links)
+index_html = index_template.render(title=page_title, description=page_description, posts=index_links)
 
 # Write the index HTML to a file in the output directory
 index_file = os.path.join(output_dir, 'index.html')

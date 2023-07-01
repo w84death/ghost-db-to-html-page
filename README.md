@@ -14,6 +14,8 @@ This Python script extracts posts from a Ghost blog SQLite database and generate
 
 2. Place the `ghost.db` in a local directory accessible from the script direcotry.
 
+3. Update `index_template.html` and `page_template.html` to your liking (like copyright in footer!)
+
 3. Open a terminal or command prompt and navigate to the script directory.
 
 4. Run the script with the following command:
